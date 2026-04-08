@@ -1,0 +1,31 @@
+//21/12
+constante N: inteiro = 10
+
+var nota1 : real
+var nota2 : real
+var media_ponderada : real
+var soma : real
+var super_media : real
+var chute : real
+para (var i = 1; i <= N; i = i + 1) {
+    escreva("Aluno ${i}");
+  nota1 = real(leia("Insira a Primeira nota:"))
+  nota2 = real(leia("Insira a Segunda nota:"))
+  media_ponderada = ((nota1*4) + (nota2*7))/11
+  soma = soma+media_ponderada
+  super_media = soma/N
+  escreva("A nota 1 foi ${nota1}")
+  escreva("A nota 2 foi ${nota2}")
+  escreva("A media ponderada foi ${media_ponderada}")
+}
+    {
+fazer {
+  chute = real(leia("Qual é o valor da Super Medida"))
+  se (chute > super_media) {
+    escreva('Valor alto demais!'); 
+  } senao se (chute < super_media) {
+    escreva('Valor baixo demais!');
+  } senao {
+    escreva('Parabéns, você acertou!');}
+ }   enquanto(chute != super_media)
+ }
