@@ -78,13 +78,13 @@ int main()
 		{
 			tentativas++;
 			printf("Digite quatro números entre 1 e 15 (tentativa %d): ", tentativas);
-			scanf("%d %d %d", &aposta1, &aposta2, &aposta3, &aposta4);
+			scanf("%d %d %d %d", &aposta1, &aposta2, &aposta3, &aposta4);
 
 			numero_de_acertos = contagem_de_acertos(primeiro_numero, segundo_numero, terceiro_numero, quarto_numero, aposta1, aposta2, aposta3, aposta4);
 
 			printf("Você acertou %d números na sua aposta!\n", numero_de_acertos);
 		}
-		while (numero_de_acertos !=3);
+		while (numero_de_acertos !=4);
 
 		printf("Você conseguiu em %d tentativa(s) e gastou %d reais\n", tentativas, tentativas*6);
 
@@ -120,3 +120,4 @@ int main()
 	}
 	return 0;
 }
+
