@@ -8,7 +8,9 @@
 int main() {
 	int vetor[N];
 	int i, posicao;
-
+	
+	setlocale(LC_ALL, "Portuguese");
+	
 	srand(time(NULL));
 
 	printf("Vetores:\n");
