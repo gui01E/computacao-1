@@ -113,5 +113,34 @@ void aplicar_regra_buraco_negro(int lin, int col) {
                 }
             }
         }
-    return 0;
+        for (int i = 0; i < TAM; i++) {
+            for (int j = 0; j < TAM; j++) {
+                tabuleiro[i][j] = novo_tabuleiro[i][j];
+            }
+        }
+        tabuleiro[lin][col] = COMP;
+    }
+}
+
+void jogada_humano(int jogador, char simbolo) {
+    int lin, col;
+    while (1) {
+        printf("\nJogador %d (%c), digite a Linha e Coluna (0 a 4): ", jogador, simbolo);
+        if (scanf("%d %d", &lin, &col) != 2) {
+            printf("Entrada invalida! Use numeros.\n");
+            while (getchar() != '\n'); 
+            continue;
+        }
+
+        if (lin >= 0 && lin < TAM && col >= 0 && col < TAM && tabuleiro[lin][col] == VAZIO) {
+            tabuleiro[lin][col] = simbolo;
+            aplicar_regra_proximidade(lin, col, simbolo);
+            break;
+        } else {
+            printf("Posição invalida ou já ocupada! Tente novamente.\n");
+        }
+    }
+}
+        
+     return 0;
 }
