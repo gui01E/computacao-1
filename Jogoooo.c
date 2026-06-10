@@ -74,7 +74,7 @@ void aplicar_regra_proximidade(int lin, int col, char simbolo_atual) {
 
         if (nova_l >= 0 && nova_l < TAM && nova_c >= 0 && nova_c < TAM) {
             if (tabuleiro[nova_l][nova_c] == adversario) {
-                printf("\n REGRA 1 ATIVADA! Você jogou ao lado do seu adversario. Perderá a proxima rodada!\n");
+                printf("\n VOCÊ ATIVOU A REGRA 1! Você jogou ao lado do seu adversario. Perderá a proxima rodada!\n");
                 pulou_vez[jogador_atual_idx] = 1; 
                 break;
             }
@@ -84,7 +84,7 @@ void aplicar_regra_proximidade(int lin, int col, char simbolo_atual) {
 
 void aplicar_regra_buraco_negro(int lin, int col) {
     if ((lin == 2 && col == 2) || (lin == 0 && col == 0) || (lin == 0 && col == 4) || (lin == 4 && col == 0) || (lin == 4 && col == 4)) {
-        printf("\n REGRA 2 ATIVADA! O Caos caiu em um ponto gravitacional (%d,%d). O tabuleiro se mexeu!\n", lin, col);
+        printf("\n O COMPUTADOR ATIVOU A REGRA 2! O Caos acertou o meio do tabuleiro! (%d,%d). O tabuleiro se mexeu!\n", lin, col);
         
         char novo_tabuleiro[TAM][TAM];
         for (int i = 0; i < TAM; i++) {
@@ -108,7 +108,7 @@ void aplicar_regra_buraco_negro(int lin, int col) {
                     if (nova_l >= 0 && nova_l < TAM && nova_c >= 0 && nova_c < TAM) {
                         novo_tabuleiro[nova_l][nova_c] = tabuleiro[i][j];
                     } else {
-                        printf("Uma peça em (%d,%d) foi ejetada do tabuleiro!\n", i, j);
+                        printf("Uma peça em (%d,%d) foi expurgada do tabuleiro!\n", i, j);
                     }
                 }
             }
