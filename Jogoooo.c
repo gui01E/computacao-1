@@ -122,7 +122,7 @@ void aplicar_regra_buraco_negro(int lin, int col) {
     }
 }
 
-void jogada_humano(int jogador, char simbolo) {
+void jogada_J1_J2(int jogador, char simbolo) {
     int lin, col;
     while (1) {
         printf("\nJogador %d (%c), digite a Linha e Coluna (0 a 4): ", jogador, simbolo);
@@ -137,7 +137,7 @@ void jogada_humano(int jogador, char simbolo) {
             aplicar_regra_proximidade(lin, col, simbolo);
             break;
         } else {
-            printf("Posição invalida ou já ocupada! Tente novamente.\n");
+            printf("Posição invalida ou já ocupada! JOGA DENOVO.\n");
         }
     }
 }
