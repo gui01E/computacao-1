@@ -84,7 +84,7 @@ void aplicar_regra_proximidade(int lin, int col, char simbolo_atual) {
 
 void aplicar_regra_buraco_negro(int lin, int col) {
     if ((lin == 2 && col == 2) || (lin == 0 && col == 0) || (lin == 0 && col == 4) || (lin == 4 && col == 0) || (lin == 4 && col == 4)) {
-        printf("\n O COMPUTADOR ATIVOU A REGRA 2! O Caos acertou o meio do tabuleiro! (%d,%d). O tabuleiro se mexeu!\n", lin, col);
+        printf("\n O COMPUTADOR ATIVOU A REGRA 2! O Caos acertou o meio do tabuleiro (%d,%d). O tabuleiro se mexeu!\n", lin, col);
         
         char novo_tabuleiro[TAM][TAM];
         for (int i = 0; i < TAM; i++) {
@@ -113,6 +113,7 @@ void aplicar_regra_buraco_negro(int lin, int col) {
                 }
             }
         }
+        
         for (int i = 0; i < TAM; i++) {
             for (int j = 0; j < TAM; j++) {
                 tabuleiro[i][j] = novo_tabuleiro[i][j];
@@ -137,10 +138,72 @@ void jogada_J1_J2(int jogador, char simbolo) {
             aplicar_regra_proximidade(lin, col, simbolo);
             break;
         } else {
-            printf("Posição invalida ou já ocupada! JOGA DENOVO.\n");
+            printf("Posição invalida ou já ocupada! joga denovo.\n");
         }
     }
 }
-        
-     return 0;
+
+void jogada_computador() {
+    int lin, col;
+    printf("\n ""Turno do Computador (O Caos).");
+    
+    do {
+        lin = rand() % TAM;
+        col = rand() % TAM;
+    } while (tabuleiro[lin][col] != VAZIO);
+
+    printf(" O Computador jogou em (%d, %d)\n", lin, col);
+    tabuleiro[lin][col] = COMP;
+
+    aplicar_regra_buraco_negro(lin, col);
+}
+
+int main() {
+    srand(time(NULL));
+    inicializar_tabuleiro();
+    
+    int turno = 1; 
+    printf(" Trilema do caos \n");
+    printf("Alinhe 4 simbolos iguais para vencer.\n");
+
+    while (1) {
+        exibir_tabuleiro();
+        if (pulou_vez[turno] == 1) {
+            printf("\n Jogador %d teve o turno pulado graças a Regra de Proximidade!\n", turno);
+            pulou_vez[turno] = 0; 
+        } else {
+            if (turno == 1) {
+                jogada_humano(1, J1);
+                if (verificar_vitoria(J1) == 1) {
+                    exibir_tabuleiro();
+                    printf("\n PARABÉNS! O Jogador 1 venceu o Caos e o Oponente!\n");
+                    break;
+                }
+            } else if (turno == 2) {
+                jogada_humano(2, J2);
+                if (verificar_vitoria(J2) == 1) {
+                    exibir_tabuleiro();
+                    printf("\n PARABÉNS! O Jogador 2  venceu o Caos e o Oponente!\n");
+                    break;
+                }
+            } else {
+                jogada_computador();
+                if (verificar_vitoria(COMP) == 1) {
+                    exibir_tabuleiro();
+                    printf("\n O COMPUTADOR VENCEU! O Caos dominou o tabuleiro. Ambos jogadores perderam!(seus vermes)\n");
+                    break;
+                }
+            }
+        }
+
+        if (tabuleiro_cheio() == 1) {
+            exibir_tabuleiro();
+            printf("\n EMPATE! O tabuleiro foi completamente tomado pelo caos e ninguem alinhou 4 peças.\n");
+            break;
+        }
+
+        turno = (turno % 3) + 1;
+    }
+
+    return 0;
 }
